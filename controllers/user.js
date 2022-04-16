@@ -11,4 +11,13 @@ const createUserController = async (req, res, _next) => {
     }   
 };
 
-module.exports = createUserController;
+const getUsersController = async (req, res, _next) => {
+    console.log(`requisição feita por ${req.email}`); 
+    const listUsers = await services.getUsers();
+    return res.status(200).json(listUsers);
+};
+
+module.exports = {
+    createUserController,
+    getUsersController,
+};

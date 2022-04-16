@@ -3,6 +3,7 @@ const controllerUser = require('./controllers/user');
 const controllerLogin = require('./controllers/login');
 const userValidations = require('./middlewares/validateUser');
 const loginValidations = require('./middlewares/validateLogin');
+const auth = require('./middlewares/auth');
 
 const app = express();
 
@@ -17,7 +18,9 @@ app.get('/', (request, response) => {
 
 app.post('/user', userValidations.validateName, 
 userValidations.validateEmail, userValidations.validadePassword, 
-userValidations.findUser, controllerUser);
+userValidations.findUser, controllerUser.createUserController);
+
+app.get('/user', auth.validateToken, controllerUser.getUsersController);
 
 app.post('/login', loginValidations.validateEmail, 
 loginValidations.validadePassword, controllerLogin.login);
