@@ -1,9 +1,9 @@
-const { Users } = require('../models');
+const services = require('../services/user');
 
-const createUser = async (req, res, _next) => {
+const createUserController = async (req, res, _next) => {
     try {
         const { displayName, email, password, image } = req.body;
-        const created = await Users.create({ displayName, email, password, image });
+        const created = await services.createUser(displayName, email, password, image);
         return res.status(201).json(created);
     } catch (e) {
         console.log(e.message);
@@ -11,4 +11,4 @@ const createUser = async (req, res, _next) => {
     }   
 };
 
-module.exports = createUser;
+module.exports = createUserController;
