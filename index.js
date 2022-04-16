@@ -22,5 +22,7 @@ userValidations.findUser, controllerUser.createUserController);
 
 app.get('/user', auth.validateToken, controllerUser.getUsersController);
 
+app.get('/user/:id', auth.validateToken, controllerUser.getUserById);
+
 app.post('/login', loginValidations.validateEmail, 
 loginValidations.validadePassword, controllerLogin.login);
