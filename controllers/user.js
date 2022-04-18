@@ -12,8 +12,7 @@ const createUserController = async (req, res, _next) => {
 };
 
 const getUsersController = async (req, res, _next) => {
-    try {
-    console.log(`requisição feita por ${req.email}`); 
+    try { 
     const listUsers = await services.getUsers();
     return res.status(200).json(listUsers);
 } catch (e) {

@@ -9,7 +9,7 @@ const validateToken = async (req, res, next) => {
     }
     try {
         const decoded = jwt.verify(authorization, SECRET);
-    req.email = decoded.email;
+    req.id = decoded.id;
     } catch (e) {
         return res.status(401).json({ message: 'Expired or invalid token' });
     }
