@@ -42,3 +42,5 @@ postValidation.verifyCatId, controllerPosts.createPost);
 
 app.get('/post', auth.validateToken, controllerPosts.getAllPosts);
 app.get('/post/:id', auth.validateToken, controllerPosts.getById);
+
+app.put('/post/:id', auth.validateToken, controllerPosts.updatePost);

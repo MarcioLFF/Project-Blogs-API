@@ -25,8 +25,26 @@ const getPostsById = async (id) => {
     return getPostId;
 };
 
+const updatedPost = async (title, content, id, insertId) => {
+    const getPost = await BlogPosts.findByPk(id);
+    console.log(getPost.id);
+    if (getPost.userId !== insertId) { // verifico se o id do usuário que cadastrou o post é o mesmo que logou com o token
+        return { message: 'Product not found' };
+    }
+    const getCat = await Categories.findByPk(id); // para conseguir pegar as categorias
+    await BlogPosts.update({ title, content }, { where: { id } });
+    return {
+        id: getPost.dataValues.id,
+        title,
+        content,
+        userId: getPost.dataValues.userId,
+        categories: [getCat.dataValues],    
+    };
+};
+
 module.exports = {
     created,
     getPosts,
     getPostsById,
+    updatedPost,
 };
