@@ -4,7 +4,7 @@ const { Users } = require('../models');
 const SECRET = 'MEU_SEGREDO';
 
 const jwtConfig = {
-    expiresIn: '15m',
+    expiresIn: '60m',
     algorithm: 'HS256',
 };
 

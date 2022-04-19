@@ -9,14 +9,24 @@ const created = async (title, id, content, categoryIds) => {
 
 const getPosts = async () => {
     const posts = await BlogPosts.findAll({ include: [{
-        model: Users, as: 'user' },
+        model: Users, as: 'user', attributes: { exclude: ['password'] } },
         { model: Categories, as: 'categories', through: { attributes: [] },
     }],
 });
     return posts;
 };
 
+const getPostsById = async (id) => {
+    const getPostId = await BlogPosts.findByPk(id, { include: [{
+        model: Users, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Categories, as: 'categories', through: { attributes: [] },
+    }],
+});
+    return getPostId;
+};
+
 module.exports = {
     created,
     getPosts,
+    getPostsById,
 };
