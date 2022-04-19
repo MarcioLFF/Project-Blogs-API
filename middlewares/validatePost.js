@@ -27,7 +27,6 @@ const ValidateCatId = (req, res, next) => {
 const verifyCatId = async (req, res, next) => {
     const { categoryIds } = req.body;
     const foundCatId = await Categories.findAll({ where: { id: categoryIds } });
-    console.log(foundCatId)
     if (!foundCatId.length) {
         return res.status(400).json({ message: '"categoryIds" not found' });
     }

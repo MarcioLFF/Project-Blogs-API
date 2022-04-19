@@ -6,6 +6,12 @@ const createPost = async (req, res, _next) => {
     return res.status(201).json(created);
 };
 
+const getAllPosts = async (req, res, _next) => {
+    const posts = await services.getPosts();
+    return res.status(200).json(posts);
+};
+
 module.exports = {
     createPost,
+    getAllPosts,
 };

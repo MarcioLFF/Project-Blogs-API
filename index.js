@@ -39,3 +39,5 @@ auth.validateToken, controllerCategories.createCategory);
 app.post('/post', auth.validateToken, postValidation.validateTitle, 
 postValidation.validateContent, postValidation.ValidateCatId, 
 postValidation.verifyCatId, controllerPosts.createPost);
+
+app.get('/post', auth.validateToken, controllerPosts.getAllPosts);
