@@ -35,8 +35,15 @@ const getUserById = async (req, res, _next) => {
     }   
 };
 
+const deleteUser = async (req, res, _next) => {
+    const insertId = req.id;
+    await services.userDeleted(insertId);
+    res.status(204).end();
+};
+
 module.exports = {
     createUserController,
     getUsersController,
     getUserById,
+    deleteUser,
 };
