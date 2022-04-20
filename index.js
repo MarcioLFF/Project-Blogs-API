@@ -44,3 +44,5 @@ app.get('/post', auth.validateToken, controllerPosts.getAllPosts);
 app.get('/post/:id', auth.validateToken, controllerPosts.getById);
 
 app.put('/post/:id', auth.validateToken, controllerPosts.updatePost);
+
+app.delete('/post/:id', auth.validateToken, controllerPosts.postDelete);

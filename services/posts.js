@@ -27,9 +27,9 @@ const getPostsById = async (id) => {
 
 const updatedPost = async (title, content, id, insertId) => {
     const getPost = await BlogPosts.findByPk(id);
-    console.log(getPost.id);
+    // console.log(getPost.id);
     if (getPost.userId !== insertId) { // verifico se o id do usuário que cadastrou o post é o mesmo que logou com o token
-        return { message: 'Product not found' };
+        return { message: 'Unauthorized' };
     }
     const getCat = await Categories.findByPk(id); // para conseguir pegar as categorias
     await BlogPosts.update({ title, content }, { where: { id } });
@@ -42,9 +42,22 @@ const updatedPost = async (title, content, id, insertId) => {
     };
 };
 
+const postDeleted = async (res, id, insertId) => {
+    const getPost = await BlogPosts.findByPk(id);
+    if (!getPost) {
+        return res.status(404).json({ message: 'Post does not exist' });
+    }
+    if (getPost.userId !== insertId) {
+        return { message: 'Unauthorized' };
+    }
+   const deleted = await BlogPosts.destroy({ where: { id } });
+   return deleted;
+};
+
 module.exports = {
     created,
     getPosts,
     getPostsById,
     updatedPost,
+    postDeleted,
 };
