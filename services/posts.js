@@ -19,7 +19,7 @@ const getPosts = async () => {
 const getPostsById = async (id) => {
     const getPostId = await BlogPosts.findByPk(id, { include: [{
         model: Users, as: 'user', attributes: { exclude: ['password'] } },
-        { model: Categories, as: 'categories', through: { attributes: [] },
+        { model: Categories, as: 'categories', through: { attributes: [] }, // entender
     }],
 });
     return getPostId;
